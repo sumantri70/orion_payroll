@@ -1,5 +1,6 @@
 <?php
-    include($_SERVER['DOCUMENT_ROOT'].'/orion_payroll/konfig/koneksi.php');        
+    include($_SERVER['DOCUMENT_ROOT'].'koneksi.php');
+    $id              = $_POST['id'];
     $nik             = $_POST['nik'];
     $nama            = $_POST['nama'];
     $alamat          = $_POST['alamat'];
@@ -13,8 +14,8 @@
     
     class emp{}
 
-    $sql = "INSERT INTO master_pegawai (nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, status)  
-            VALUES('$nik', '$nama', '$alamat', '$no_telpon_1', '$no_telpon_2', '$email', '$tgl_lahir', '$tgl_mulai_kerja', '$gaji_pokok', '$status')";    
+    $sql = "INSERT INTO master_pegawai (id, nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, status)  
+            '$id', '$nik', '$nama', '$alamat', '$no_telpon_1', '$no_telpon_2', '$email', '$tgl_lahir', '$tgl_mulai_kerja', '$gaji_pokok', '$status')";
     $qry = mysqli_query($connect,$sql); 
 
     if($qry){
