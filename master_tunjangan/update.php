@@ -5,12 +5,6 @@
     $nama       = $_POST['nama'];
     $keterangan = $_POST['keterangan'];    
     $status     = $_POST['status'];
-
-    // $id         = $_GET['id'];
-    // $kode       = $_GET['kode'];
-    // $nama       = $_GET['nama'];
-    // $keterangan = $_GET['keterangan'];    
-    // $status     = $_GET['status'];
     
     class emp{}
     $sql = "UPDATE master_tunjangan SET 
@@ -19,7 +13,6 @@
                    keterangan = '$keterangan',
                    status = '$status' 
             WHERE id = '$id' ";    
-    echo($sql);
     $qry = mysqli_query($connect, $sql);     
 
     if($qry){

@@ -9,12 +9,13 @@
     $tgl_lahir       = $_POST['tgl_lahir'];
     $tgl_mulai_kerja = $_POST['tgl_mulai_kerja'];
     $gaji_pokok      = $_POST['gaji_pokok'];
+    $keterangan      = $_POST['keterangan'];
     $status          = $_POST['status'];
     
     class emp{}
 
-    $sql = "INSERT INTO master_pegawai (nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, status)  
-            VALUES('$nik', '$nama', '$alamat', '$no_telpon_1', '$no_telpon_2', '$email', '$tgl_lahir', '$tgl_mulai_kerja', '$gaji_pokok', '$status')";    
+    $sql = "INSERT INTO master_pegawai (nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, keterangan, status)  
+            VALUES('$nik', '$nama', '$alamat', '$no_telpon_1', '$no_telpon_2', '$email', '$tgl_lahir', '$tgl_mulai_kerja', '$gaji_pokok', '$keterangan', '$status')";    
     $qry = mysqli_query($connect,$sql); 
 
     if($qry){
