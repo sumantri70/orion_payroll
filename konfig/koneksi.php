@@ -1,5 +1,6 @@
 <?php
 	$server		= "192.168.43.59";	
+	//$server		= "localhost";	
 	$user		= "root"; 
 	$password	= "sumantri"; 
 	$database	= "orion_payroll"; 

@@ -7,7 +7,7 @@
     $status     = $_POST['status'];
     
     class emp{}
-    $sql = "UPDATE master_tunjangan SET 
+    $sql = "UPDATE master_potongan SET 
                    kode = '$kode',
                    nama = '$nama',
                    keterangan = '$keterangan',

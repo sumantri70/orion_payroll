@@ -11,22 +11,7 @@
     $tgl_mulai_kerja = $_POST['tgl_mulai_kerja'];
     $gaji_pokok      = $_POST['gaji_pokok'];
     $keterangan      = $_POST['keterangan'];
-    $status          = $_POST['status'];
-
-    // $id              = $_GET['id'];
-    // $nik             = $_GET['nik'];
-    // $nama            = $_GET['nama'];
-    // $alamat          = $_GET['alamat'];
-    // $no_telpon_1     = $_GET['no_telpon_1'];
-    // $no_telpon_2     = $_GET['no_telpon_2'];
-    // $email           = $_GET['email'];
-    // $tgl_lahir       = $_GET['tgl_lahir'];
-    // $tgl_mulai_kerja = $_GET['tgl_mulai_kerja'];
-    // $gaji_pokok      = $_GET['gaji_pokok'];
-    // $keterangan      = $_GET['keterangan'];
-    // $status          = $_GET['status'];
-
-    
+    $status          = $_POST['status'];    
     
     class emp{}
     $sql = "UPDATE master_pegawai SET 
