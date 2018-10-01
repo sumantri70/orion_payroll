@@ -1,29 +1,45 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT'].'/orion_payroll/konfig/koneksi.php');        
-    $nik             = $_POST['nik'];
-    $nama            = $_POST['nama'];
-    $alamat          = $_POST['alamat'];
-    $no_telpon_1     = $_POST['no_telpon_1'];
-    $no_telpon_2     = $_POST['no_telpon_2'];
-    $email           = $_POST['email'];
-    $tgl_lahir       = $_POST['tgl_lahir'];
-    $tgl_mulai_kerja = $_POST['tgl_mulai_kerja'];
-    $gaji_pokok      = $_POST['gaji_pokok'];
-    $keterangan      = $_POST['keterangan'];
-    $status          = $_POST['status'];
+    $json   =  $_POST['data'];    
     
     class emp{}
 
-    $sql = "INSERT INTO master_pegawai (nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, keterangan, status)  
-            VALUES('$nik', '$nama', '$alamat', '$no_telpon_1', '$no_telpon_2', '$email', '$tgl_lahir', '$tgl_mulai_kerja', '$gaji_pokok', '$keterangan', '$status')";    
-    $qry = mysqli_query($connect,$sql); 
+    $ArData = array();
+    $ArData = json_decode($json, true); //Convert dari json ke array
+    $IsiMaster  = true;
+    $id_pegawai = 0;
+    $hasil      = false;
+    foreach($ArData as $item) {       
+        if ($IsiMaster == true) {
+            $nik             = $item['nik'];
+            $nama            = $item['nama'];
+            $alamat          = $item['alamat'];
+            $no_telpon_1     = $item['no_telpon_1'];
+            $no_telpon_2     = $item['no_telpon_2'];
+            $email           = $item['email'];
+            $tgl_lahir       = $item['tgl_lahir'];
+            $tgl_mulai_kerja = $item['tgl_mulai_kerja'];
+            $gaji_pokok      = $item['gaji_pokok'];
+            $keterangan      = $item['keterangan'];
+            $status          = $item['status'];
+            
+            $sql = "INSERT INTO master_pegawai (nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, keterangan, status)  
+                    VALUES('$nik', '$nama', '$alamat', '$no_telpon_1', '$no_telpon_2', '$email', '$tgl_lahir', '$tgl_mulai_kerja', '$gaji_pokok', '$keterangan', '$status')";    
+            $mysql->query($sql);
+            $id_pegawai = $mysql->insert_id;            
+            $IsiMaster = false;    
+        }
 
+        $id_tunjangan    = $item['id_tunjangan'];
+        $jumlah          = $item['jumlah'];
 
-    // $sql = "INSERT INTO detail_tunjangan_pegawai (id_pegawai, id_tunjangan, jumlah)  
-    //         VALUES('$id_pegawai', '$id_tunjangan', '$jumlah')";    
-    // $qry = mysqli_query($connect,$sql); 
+        $sql = "INSERT INTO detail_tunjangan_pegawai (id_pegawai, id_tunjangan, jumlah)  
+                VALUES('$id_pegawai', '$id_tunjangan', '$jumlah')";    
+        $mysql->query($sql);
+        $hasil = true;
+    }
 
-    if($qry){
+    if($hasil == true){
         $response = new emp();
 		$response->success = 1;
 		$response->message = "Data berhasil di simpan";
@@ -35,4 +51,3 @@
 		die(json_encode($response)); 
     }
 ?>
-
