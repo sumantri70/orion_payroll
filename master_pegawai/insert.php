@@ -9,6 +9,7 @@
     $IsiMaster  = true;
     $id_pegawai = 0;
     $hasil      = false;
+    
     foreach($ArData as $item) {       
         if ($IsiMaster == true) {
             $nik             = $item['nik'];
@@ -26,8 +27,8 @@
             $sql = "INSERT INTO master_pegawai (nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, keterangan, status)  
                     VALUES('$nik', '$nama', '$alamat', '$no_telpon_1', '$no_telpon_2', '$email', '$tgl_lahir', '$tgl_mulai_kerja', '$gaji_pokok', '$keterangan', '$status')";    
             $mysql->query($sql);
-            $id_pegawai = $mysql->insert_id;            
-            $IsiMaster = false;    
+            $id_pegawai = $mysql->insert_id; //Ambil id yang di insert            
+            $IsiMaster  = false;    
         }
 
         $id_tunjangan    = $item['id_tunjangan'];

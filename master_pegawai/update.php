@@ -1,20 +1,31 @@
 <?php
-    include($_SERVER['DOCUMENT_ROOT'].'/orion_payroll/konfig/koneksi.php');        
-    $id              = $_POST['id'];
-    $nik             = $_POST['nik'];
-    $nama            = $_POST['nama'];
-    $alamat          = $_POST['alamat'];
-    $no_telpon_1     = $_POST['no_telpon_1'];
-    $no_telpon_2     = $_POST['no_telpon_2'];
-    $email           = $_POST['email'];
-    $tgl_lahir       = $_POST['tgl_lahir'];
-    $tgl_mulai_kerja = $_POST['tgl_mulai_kerja'];
-    $gaji_pokok      = $_POST['gaji_pokok'];
-    $keterangan      = $_POST['keterangan'];
-    $status          = $_POST['status'];    
-    
-    class emp{}
-    $sql = "UPDATE master_pegawai SET 
+    include($_SERVER['DOCUMENT_ROOT'].'/orion_payroll/konfig/koneksi.php');
+    $json   =  $_POST['data'];  
+    class emp{}                
+    //echo json_encode($json);
+
+    $ArData = array();
+    $ArData = json_decode($json, true); //Convert dari json ke array
+    $IsiMaster  = true;
+    $id_pegawai = 0;
+    $hasil      = false;
+
+    foreach($ArData as $item) {       
+        if ($IsiMaster == true) {  
+            $id              = $item['id'];
+            $nik             = $item['nik'];
+            $nama            = $item['nama'];
+            $alamat          = $item['alamat'];
+            $no_telpon_1     = $item['no_telpon_1'];
+            $no_telpon_2     = $item['no_telpon_2'];
+            $email           = $item['email'];
+            $tgl_lahir       = $item['tgl_lahir'];
+            $tgl_mulai_kerja = $item['tgl_mulai_kerja'];
+            $gaji_pokok      = $item['gaji_pokok'];
+            $keterangan      = $item['keterangan'];
+            $status          = $item['status'];
+
+            $sql = "UPDATE master_pegawai SET 
                     nik = '$nik',
                     nama = '$nama',
                     alamat = '$alamat',
@@ -27,17 +38,34 @@
                     keterangan = '$keterangan',
                     status = '$status'
             WHERE id = '$id' ";    
-    $qry = mysqli_query($connect, $sql);     
 
-    if($qry){
+            $mysql->query($sql);
+            $id_pegawai = $id; 
+            $IsiMaster  = false;    
+            
+            //Delete detail pegawai
+            $sql = "DELETE FROM detail_tunjangan_pegawai WHERE id_pegawai = '$id_pegawai'";            
+            $mysql->query($sql);
+        }
+
+        $id_tunjangan    = $item['id_tunjangan'];
+        $jumlah          = $item['jumlah'];
+
+        $sql = "INSERT INTO detail_tunjangan_pegawai (id_pegawai, id_tunjangan, jumlah)  
+                VALUES('$id_pegawai', '$id_tunjangan', '$jumlah')";    
+        $mysql->query($sql);
+        $hasil = true;
+    }    
+
+    if($hasil == true){
         $response = new emp();
 		$response->success = 1;
-		$response->message = "Data berhasil di ubah";
+		$response->message = "Data berhasil di diubah";
 		die(json_encode($response));
     }else{
         $response = new emp();
 		$response->success = 0;
-		$response->message = "Error update Data";
+		$response->message = "Error ubah Data";
 		die(json_encode($response)); 
     }
 ?>
