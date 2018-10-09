@@ -23,11 +23,21 @@
             $gaji_pokok      = $item['gaji_pokok'];
             $keterangan      = $item['keterangan'];
             $status          = $item['status'];
+            $uang_ikatan     = $item['uang_ikatan'];
+            $uang_kehadiran  = $item['uang_kehadiran'];
+            $premi_harian    = $item['premi_harian'];
+            $premi_perjam    = $item['premi_perjam'];
+            $tanggal         = $item['tanggal'];
             
-            $sql = "INSERT INTO master_pegawai (nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, keterangan, status)  
-                    VALUES('$nik', '$nama', '$alamat', '$no_telpon_1', '$no_telpon_2', '$email', '$tgl_lahir', '$tgl_mulai_kerja', '$gaji_pokok', '$keterangan', '$status')";    
+            $sql = "INSERT INTO master_pegawai (nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, keterangan, status, uang_ikatan, uang_kehadiran, premi_harian, premi_perjam)  
+                    VALUES('$nik', '$nama', '$alamat', '$no_telpon_1', '$no_telpon_2', '$email', '$tgl_lahir', '$tgl_mulai_kerja', '$gaji_pokok', '$keterangan', '$status', '$uang_ikatan', '$uang_kehadiran', '$premi_harian', '$premi_perjam')";    
             $mysql->query($sql);
             $id_pegawai = $mysql->insert_id; //Ambil id yang di insert            
+
+            $sql = "INSERT INTO histori_gaji_pegawai (id_pegawai, tanggal, gaji_pokok, uang_ikatan, uang_kehadiran, premi_harian, premi_perjam)  
+                    VALUES('$id_pegawai', '$tanggal', '$gaji_pokok', '$uang_ikatan', '$uang_kehadiran', '$premi_harian', '$premi_perjam')";    
+            $mysql->query($sql);
+
             $IsiMaster  = false;    
         }
 
@@ -37,7 +47,7 @@
         $sql = "INSERT INTO detail_tunjangan_pegawai (id_pegawai, id_tunjangan, jumlah)  
                 VALUES('$id_pegawai', '$id_tunjangan', '$jumlah')";    
         $mysql->query($sql);
-        $hasil = true;
+        $hasil = true;        
     }
 
     if($hasil == true){

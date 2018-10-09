@@ -24,6 +24,12 @@
             $gaji_pokok      = $item['gaji_pokok'];
             $keterangan      = $item['keterangan'];
             $status          = $item['status'];
+            $uang_ikatan     = $item['uang_ikatan'];
+            $uang_kehadiran  = $item['uang_kehadiran'];
+            $premi_harian    = $item['premi_harian'];
+            $premi_perjam    = $item['premi_perjam'];
+            $tanggal         = $item['tanggal'];
+            $save_histori    = $item['save_histori'];            
 
             $sql = "UPDATE master_pegawai SET 
                     nik = '$nik',
@@ -45,7 +51,14 @@
             
             //Delete detail pegawai
             $sql = "DELETE FROM detail_tunjangan_pegawai WHERE id_pegawai = '$id_pegawai'";            
-            $mysql->query($sql);
+            $mysql->query($sql);            
+
+            if ($save_histori == 'T'){
+                $sql = "INSERT INTO histori_gaji_pegawai (id_pegawai, tanggal, gaji_pokok, uang_ikatan, uang_kehadiran, premi_harian, premi_perjam)  
+                VALUES('$id_pegawai', '$tanggal', '$gaji_pokok', '$uang_ikatan', '$uang_kehadiran', '$premi_harian', '$premi_perjam')";    
+                $mysql->query($sql);                
+            }
+
         }
 
         $id_tunjangan    = $item['id_tunjangan'];

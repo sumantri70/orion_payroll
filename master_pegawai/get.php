@@ -2,7 +2,7 @@
 	include($_SERVER['DOCUMENT_ROOT'].'/orion_payroll/konfig/koneksi.php');	 
 	$id = $_GET['id'];
 
-    $sql = "SELECT id, nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, status, keterangan 
+    $sql = "SELECT id, nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, status, keterangan, uang_ikatan, uang_kehadiran, premi_harian, premi_perjam 
             FROM master_pegawai WHERE id = $id";
     $qry = mysqli_query($connect, $sql);            
 
