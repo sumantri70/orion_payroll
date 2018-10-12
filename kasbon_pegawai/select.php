@@ -7,10 +7,7 @@
 	$order_by   = $_GET['order_by'];
 
 
-	//Filter = " AND tanggal BETWEEN '" & Format(dtpDari.Value, "yyyy-MM-dd") & "' AND '" & Format(dtpSampai.Value, "yyyy-MM-dd") & "'"
-
-
-	$filter = "";
+	$filter = " AND tanggal BETWEEN '" & Format(dtpDari.Value, "yyyy-MM-dd") & "' AND '" & Format(dtpSampai.Value, "yyyy-MM-dd") & "'";
 
 	//Filter Periode
 
@@ -32,7 +29,7 @@
 		$order .= " ORDER BY $order_by ";
 	}
     
-	$sql = "SELECT id, nomor, tanggal, id_pegawai, jumlah, cicilan, sisa, keterangan, user_id, tgl_input 
+	$sql = "SELECT id, nomor, tanggal, id_pegawai, jumlah, cicilan, sisa, keterangan, user_id, tgl_input, user_edit, tgl_edit
 			FROM kasbon_pegawai WHERE id <> 0 $filter $order ";
 	$qry = mysqli_query($connect, $sql);
 

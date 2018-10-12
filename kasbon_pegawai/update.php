@@ -9,7 +9,9 @@
     $sisa       = $_POST['sisa'];
     $keterangan = $_POST['keterangan'];
     $user_id    = $_POST['user_id'];
-    $tgl_input  = $_POST['tgl_input'];  
+    $tgl_input  = $_POST['tgl_input'];
+    $user_edit  = $_POST['user_edit'];
+    $tgl_edit   = $_POST['tgl_edit'];
     
     class emp{}
     $sql = "UPDATE kasbon_pegawai SET 
@@ -22,6 +24,8 @@
                     keterangan = '$keterangan',
                     user_id    = '$user_id',
                     tgl_input  = '$tgl_input'
+                    user_edit  = '$user_edit'
+                    tgl_edit   = '$tgl_edit'
             WHERE id = '$id' ";    
     $qry = mysqli_query($connect, $sql);     
 
