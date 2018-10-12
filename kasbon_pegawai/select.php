@@ -6,10 +6,11 @@
 	$id_pegawai = $_GET['id_pegawai'];
 	$order_by   = $_GET['order_by'];
 
-
-	$filter = " AND tanggal BETWEEN '" & Format(dtpDari.Value, "yyyy-MM-dd") & "' AND '" & Format(dtpSampai.Value, "yyyy-MM-dd") & "'";
+	
+	$filter = "";
 
 	//Filter Periode
+	$filter .= " AND tanggal BETWEEN & Format($tgl_dari, 'dd-MM-yyyy') AND Format($tgl_sampai, 'dd-MM-yyyy') ";
 
 	//Filter sisa
 	if($status <> 0){
