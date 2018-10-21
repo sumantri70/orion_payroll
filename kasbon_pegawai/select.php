@@ -10,37 +10,40 @@
 	$filter = "";
 
 	//Filter Periode
-	$filter .= " AND tanggal BETWEEN & Format($tgl_dari, 'dd-MM-yyyy') AND Format($tgl_sampai, 'dd-MM-yyyy') ";
+	$filter .= " AND m.tanggal BETWEEN '$tgl_dari' AND '$tgl_sampai' ";
 
 	//Filter sisa
 	if($status <> 0){
 		if ($status == 1) {
-			$filter .= " AND sisa > 0  ";
+			$filter .= " AND m.sisa > 0  ";
 		} else {
-			$filter .= " AND sisa <= 0  ";
+			$filter .= " AND m.sisa <= 0  ";
 		}
 	}
 
 	if($id_pegawai <> 0){
-		$filter .= " AND id_pegawai = '$id_pegawai' ";
+		$filter .= " AND m.id_pegawai = '$id_pegawai' ";
 	}
 
 	$order ="";
 	if($order_by <> "" ){
 		$order .= " ORDER BY $order_by ";
 	}
+
     
-	$sql = "SELECT id, nomor, tanggal, id_pegawai, jumlah, cicilan, sisa, keterangan, user_id, tgl_input, user_edit, tgl_edit
-			FROM kasbon_pegawai WHERE id <> 0 $filter $order ";
-	$qry = mysqli_query($connect, $sql);
+	$sql = "SELECT m.id, m.nomor, m.tanggal, m.id_pegawai, m.jumlah, m.cicilan, m.sisa, m.keterangan, m.user_id, m.tgl_input, m.user_edit, m.tgl_edit, p.nama AS nama_pegawai 
+			FROM kasbon_pegawai m, master_pegawai p 
+			WHERE m.id_pegawai = p.id $filter $order ";
+	$qry = mysqli_query($connect, $sql);	
 
 	$json = array();
 
 	while($row = mysqli_fetch_assoc($qry)){
 		$json[] = $row;
 	}
-
+	
 	echo json_encode(array('data' =>$json));
+	
 
 	mysqli_close($connect);	
 ?>

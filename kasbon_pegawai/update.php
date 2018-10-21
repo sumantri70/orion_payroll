@@ -7,27 +7,23 @@
     $jumlah     = $_POST['jumlah'];
     $cicilan    = $_POST['cicilan'];
     $sisa       = $_POST['sisa'];
-    $keterangan = $_POST['keterangan'];
-    $user_id    = $_POST['user_id'];
-    $tgl_input  = $_POST['tgl_input'];
+    $keterangan = $_POST['keterangan'];    
     $user_edit  = $_POST['user_edit'];
-    $tgl_edit   = $_POST['tgl_edit'];
+    $tgl_edit   = 'now()';
     
     class emp{}
     $sql = "UPDATE kasbon_pegawai SET 
                     nomor      = '$nomor',
                     tanggal    = '$tanggal',
-                    id_pegawai = '$id_pegawai',
+                    id_pegawai = $id_pegawai,
                     jumlah     = '$jumlah',
                     cicilan    = '$cicilan',
                     sisa       = '$sisa',
-                    keterangan = '$keterangan',
-                    user_id    = '$user_id',
-                    tgl_input  = '$tgl_input'
-                    user_edit  = '$user_edit'
-                    tgl_edit   = '$tgl_edit'
-            WHERE id = '$id' ";    
-    $qry = mysqli_query($connect, $sql);     
+                    keterangan = '$keterangan',                    
+                    user_edit  = '$user_edit',
+                    tgl_edit   = $tgl_edit
+            WHERE id = $id ";    
+    $qry = mysqli_query($connect, $sql);
 
     if($qry){
         $response = new emp();

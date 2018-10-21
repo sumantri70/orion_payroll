@@ -1,6 +1,7 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT'].'/orion_payroll/konfig/koneksi.php');        
-    $nomor      = $_POST['nomor'];
+    include($_SERVER['DOCUMENT_ROOT'].'/orion_payroll/fungsi_general/fungsi_general.php');    
+    
     $tanggal    = $_POST['tanggal'];
     $id_pegawai = $_POST['id_pegawai'];
     $jumlah     = $_POST['jumlah'];
@@ -8,15 +9,15 @@
     $sisa       = $_POST['sisa'];
     $keterangan = $_POST['keterangan'];
     $user_id    = $_POST['user_id'];
-    $tgl_input  = "now()";
-    $user_edit  = "";
-    $tgl_edit   = "null";
+    $tgl_input  = 'now()';
+    $user_edit  = '';
+    $tgl_edit   = '0';
+    $nomor      = Get_Next_Number($tanggal, 'KS');    
 
-    
     class emp{}
 
     $sql = "INSERT INTO kasbon_pegawai (nomor, tanggal, id_pegawai, jumlah, cicilan, sisa, keterangan, user_id, tgl_input, user_edit, tgl_edit)  
-            VALUES('$nomor', '$tanggal', '$id_pegawai', '$jumlah', '$cicilan', '$sisa', '$keterangan', '$user_id', '$tgl_input', '$user_edit', '$tgl_edit')";
+            VALUES('$nomor', '$tanggal', '$id_pegawai', '$jumlah', '$cicilan', '$sisa', '$keterangan', '$user_id', $tgl_input, '$user_edit', $tgl_edit)";
     $qry = mysqli_query($connect,$sql); 
 
     if($qry){
@@ -28,6 +29,6 @@
         $response = new emp();
 		$response->success = 0;
 		$response->message = "Error simpan Data";
-		die(json_encode($response)); 
+        die(json_encode($response));    
     }
 ?>
