@@ -13,7 +13,6 @@
         $Bulan  = date('m', $TglTmp);
         $Tahun  = date('Y', $TglTmp);
 
-        $Tabel = "KS";
         switch ($NoTrans) {
             case "KS" :
                 $Tabel = "kasbon_pegawai"; 

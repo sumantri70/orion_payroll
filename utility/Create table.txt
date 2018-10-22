@@ -4,43 +4,46 @@
 
 
 
--gaji_pegawai_master
-id
-nomor
-tanggal
-id_pegawai
-gaji_pokok
+package com.example.user.orion_payroll_new.models;
 
-uang_ikatan
-uang_kehadiran
-premi_harian
-premi_perjam
-
-telat_satu
-telat_dua
-dokter
-ijin_stgh_hari
-ijin_non_cuti
-ijin_cuti
-
-jam_lembur
+public class PenggajianModel {
+    private int id;
+    private String nomor, keterangan, user_id, user_edit;
+    private Double uang_ikatan, uang_kehadiran, premi_harian, premi_perjam, jam_lembur, total_telat, total_izin,
+    private long tgl_lahir, tgl_mulai_kerja;
 
 
-total_telat
-total_ijin
-total_potongan
-total_lembur
-
-
-keterangan
-user_id
-tgl_input
-user_edit
-tgl_edit
-
--kasbon_pegawai_detail
-id
-id_master
-tipe
-id_tnj_pot_kas
-jumlah
+//-gaji_pegawai_master
+//id
+//nomor
+//tanggal
+//id_pegawai
+//gaji_pokok
+//
+//uang_ikatan
+//uang_kehadiran
+//premi_harian
+//premi_perjam
+//
+//telat_satu
+//telat_dua
+//dokter
+//ijin_stgh_hari
+//ijin_non_cuti
+//ijin_cuti
+//
+//jam_lembur
+//
+//
+//total_tunjangan
+//total_potongan
+//
+//total_lembur
+//
+//
+//keterangan
+//user_id
+//tgl_input
+//user_edit
+//tgl_edit
+//
