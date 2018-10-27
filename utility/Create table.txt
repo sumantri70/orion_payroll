@@ -47,3 +47,18 @@ public class PenggajianModel {
 //user_edit
 //tgl_edit
 //
+
+
+$filter = "";
+
+
+if ($jenis != ""){
+    $filter .= " AND jenis = '$jenis' ";
+}
+
+$ordersql = "";
+
+if ($orderby == "nama") {
+    $ordersql .= " ORDER BY '$orderby' ";
+}
+

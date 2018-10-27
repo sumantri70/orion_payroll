@@ -14,7 +14,7 @@
 		$order .= " ORDER BY $order_by ";
 	}
     
-	$sql = "SELECT id, nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, status, keterangan 
+	$sql = "SELECT id, nik, nama, alamat, no_telpon_1, no_telpon_2, email, tgl_lahir, tgl_mulai_kerja, gaji_pokok, status, keterangan, uang_ikatan, uang_kehadiran, Premi_harian, Premi_perjam 
 			from master_pegawai WHERE id <> 0 $filter $order ";
 	$qry = mysqli_query($connect, $sql);
 

@@ -1,0 +1,9 @@
+--MASTER--
+INSERT INTO master_tunjangan (id, kode, nama, keterangan, STATUS) VALUE (1, 'TJ001', 'Insentif', '', 'T');
+INSERT INTO master_tunjangan (id, kode, nama, keterangan, STATUS) VALUE (2, 'TJ002', 'Updah Lembur', '', 'T');
+
+INSERT INTO master_potongan (id, kode, nama, keterangan, STATUS) VALUE (1, 'PT001', 'Telat <= 15', '', 'T');
+INSERT INTO master_potongan (id, kode, nama, keterangan, STATUS) VALUE (2, 'PT002', 'Telat > 15', '', 'T');
+INSERT INTO master_potongan (id, kode, nama, keterangan, STATUS) VALUE (3, 'PT003', 'Izin 1/2 Hari', '', 'T');
+INSERT INTO master_potongan (id, kode, nama, keterangan, STATUS) VALUE (4, 'PT004', 'Izin Non Cuti', '', 'T');
+INSERT INTO master_potongan (id, kode, nama, keterangan, STATUS) VALUE (5, 'PT005', 'Dokter', '', 'T');
