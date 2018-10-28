@@ -16,6 +16,7 @@
     foreach($ArData as $item) {       
         if ($IsiMaster == true) {
             $tanggal         = $_item['tanggal'];
+            $periode         = $_item['periode'];
             $id_pegawai      = $_item['id_pegawai'];
             $gaji_pokok      = $_item['gaji_pokok'];
             $uang_ikatan     = $_item['uang_ikatan'];
@@ -41,10 +42,10 @@
             $tgl_edit        = 0;    
             $nomor           = Get_Next_Number($tanggal, 'GS');
             
-            $sql = "INSERT INTO penggajian_master (nomor, tanggal, id_pegawai, gaji_pokok, uang_ikatan, uang_kehadiran, premi_harian, premi_perjam,
+            $sql = "INSERT INTO penggajian_master (nomor, tanggal, periode, id_pegawai, gaji_pokok, uang_ikatan, uang_kehadiran, premi_harian, premi_perjam,
                                            telat_satu, telat_dua, dokter, izin_stgh_hari, izin_non_cuti, izin_cuti, jam_lembur, total_tunjangan,
                                            total_potongan, total_lembur, total_kasbon, total, keterangan, user_id, tgl_input, user_edit, tgl_edit)  
-            VALUES( '$nomor', '$tanggal', '$id_pegawai', '$gaji_pokok', '$uang_ikatan', '$uang_kehadiran', '$premi_harian', '$premi_perjam',
+            VALUES( '$nomor', '$tanggal', '$periode', '$id_pegawai', '$gaji_pokok', '$uang_ikatan', '$uang_kehadiran', '$premi_harian', '$premi_perjam',
                     '$telat_satu', '$telat_dua', '$dokter', '$izin_stgh_hari', '$izin_non_cuti', '$izin_cuti', '$jam_lembur', '$total_tunjangan',
                     '$total_potongan', '$total_lembur', '$total_kasbon', '$total', '$keterangan', '$user_id', '$tgl_input', '$user_edit', $tgl_edit)";            $mysql->query($sql);
             $id_master = $mysql->insert_id; //Ambil id yang di insert            

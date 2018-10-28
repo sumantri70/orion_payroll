@@ -42,7 +42,11 @@
                     tgl_mulai_kerja = '$tgl_mulai_kerja',
                     gaji_pokok = '$gaji_pokok',
                     keterangan = '$keterangan',
-                    status = '$status'
+                    status = '$status',
+                    uang_ikatan = '$uang_ikatan',
+                    uang_kehadiran = '$uang_kehadiran',
+                    premi_harian = '$premi_harian',
+                    premi_perjam = '$premi_perjam'
             WHERE id = '$id' ";    
 
             $mysql->query($sql);
