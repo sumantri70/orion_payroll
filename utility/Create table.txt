@@ -62,3 +62,53 @@ if ($orderby == "nama") {
     $ordersql .= " ORDER BY '$orderby' ";
 }
 
+
+
+    int id, id_master, id_tjg_pot_kas, lama_cicilan;
+    String tipe, nomor;
+    Double jumlah, sisa, total;
+    boolean check;
+    long tanggal;
+
+    id, id_master, tipe, id_tjg_pot_kas, jumlah 
+
+
+
+
+<!-- {"master":
+    {   "id_pegawai":"73",
+        "telat_satu":"0",
+        "telat_dua":"0",
+        "dokter":"0",
+        "izin_stgh_hari":"0",
+        "izin_cuti":"0",
+        "izin_non_cuti":"0",
+        "keterangan":"",
+        "user_id":"Sumantri",
+    },
+"detail":
+    [
+        {   "tipe":"T",
+            "id_tjg_pot_kas":"1",
+            "total_tunjangan":"200000.0"
+        },
+        {   "tipe":"T",
+            "id_tjg_pot_kas":"4",
+            "total_tunjangan":"100000.0"
+        },
+        {   "tipe":"T",
+            "id_tjg_pot_kas":"5",
+            "total_tunjangan":"200000.0"
+        }
+    ]
+} -->
+
+
+
+[{"nik":"NIK00001",
+  "nama":"nama",
+  "alamat":"akan",
+  "no_telpon_1":"081243488",
+  "no_telpon_2":"84648448",
+  "email":"","tgl_lahir":"2018-10-27"
+  }]

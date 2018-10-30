@@ -21,11 +21,11 @@
 	}
 
     
-	$sql = "SELECT id, nomor, tanggal, periode, id_pegawai, gaji_pokok, uang_ikatan, uang_kehadiran, premi_harian, premi_perjam,
-            telat_satu, telat_dua, dokter, izin_stgh_hari, izin_non_cuti, izin_cuti, jam_lembur, total_tunjangan,
-            total_potongan, total_lembur, total_kasbon, total, keterangan, user_id, tgl_input, user_edit, tgl_edit 
-			FROM penggajian_master
-			WHERE id <> 0 $filter $order ";
+	$sql = "SELECT m.id, m.nomor, m.tanggal, m.periode, m.id_pegawai, m.gaji_pokok, m.uang_ikatan, m.uang_kehadiran, m.premi_harian, m.premi_perjam,
+            m.telat_satu, m.telat_dua, m.dokter, m.izin_stgh_hari, m.izin_non_cuti, m.izin_cuti, m.jam_lembur, m.total_tunjangan,
+            m.total_potongan, m.total_lembur, m.total_kasbon, m.total, m.keterangan, m.user_id, m.tgl_input, m.user_edit, m.tgl_edit, p.nama AS nama_pegawai 
+			FROM penggajian_master m, master_pegawai p 
+			WHERE m.id_pegawai = p.id $filter $order ";
 	$qry = mysqli_query($connect, $sql);	
 
 	$json = array();

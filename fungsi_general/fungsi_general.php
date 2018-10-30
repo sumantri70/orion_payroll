@@ -18,7 +18,7 @@
                 $Tabel = "kasbon_pegawai"; 
                 break;
             case "GS" :
-                $Tabel = "gaji_pegawai_master"; 
+                $Tabel = "penggajian_master"; 
                 break;            
             default:
                 $Tabel ="";
