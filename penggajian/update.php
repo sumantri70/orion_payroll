@@ -12,6 +12,7 @@
     $JsonDetail = array();   
     $JsonDetail = json_decode(json_encode($ObjDetail) ,true); //Convert dari object  ke array    
 
+    $id              = $JsonMaster->id;
     $tanggal         = $JsonMaster->tanggal;
     $periode         = $JsonMaster->periode;
     $id_pegawai      = $JsonMaster->id_pegawai;
@@ -33,23 +34,68 @@
     $total_kasbon    = $JsonMaster->total_kasbon;
     $total           = $JsonMaster->total;
     $keterangan      = $JsonMaster->keterangan;
-    $user_id         = $JsonMaster->user_id;
-    $tgl_input       = 'now()';
+    $user_id         = $JsonMaster->user_id;   
     $user_edit       = '';
-    $tgl_edit        = 0;    
-    $nomor           = Get_Next_Number($tanggal, 'GS');    
+    $tgl_edit        = 'now()';    
+    $nomor           = $JsonMaster->nomor;
     $periode         = $JsonMaster->tanggal;
 
-    $sql = "INSERT INTO penggajian_master (nomor, tanggal, periode, id_pegawai, gaji_pokok, uang_ikatan, uang_kehadiran, premi_harian, premi_perjam,
-                                           telat_satu, telat_dua, dokter, izin_stgh_hari, izin_non_cuti, izin_cuti, jam_lembur, total_tunjangan,
-                                           total_potongan, total_lembur, total_kasbon, total, keterangan, user_id, tgl_input, user_edit, tgl_edit)  
-            VALUES( '$nomor', '$tanggal', '$periode', '$id_pegawai', '$gaji_pokok', '$uang_ikatan', '$uang_kehadiran', '$premi_harian', '$premi_perjam',
-                    '$telat_satu', '$telat_dua', '$dokter', '$izin_stgh_hari', '$izin_non_cuti', '$izin_cuti', '$jam_lembur', '$total_tunjangan',
-                    '$total_potongan', '$total_lembur', '$total_kasbon', '$total', '$keterangan', '$user_id', '$tgl_input', '$user_edit', $tgl_edit)";            
-    $mysql->query($sql);
-    $id_master = $mysql->insert_id; 
+    class emp{}      
 
+    $sql = "UPDATE penggajian_master SET 
+                tanggal         = '$tanggal',
+                periode         = '$periode',
+                id_pegawai      = '$id_pegawai',
+                gaji_pokok      = '$gaji_pokok',
+                uang_ikatan     = '$uang_ikatan',
+                uang_kehadiran  = '$uang_kehadiran',
+                premi_harian    = '$premi_harian',
+                premi_perjam    = '$premi_perjam',
+                telat_satu      = '$telat_satu',
+                telat_dua       = '$telat_dua',
+                dokter          = '$dokter',
+                izin_stgh_hari  = '$izin_stgh_hari',
+                izin_non_cuti   = '$izin_non_cuti',
+                izin_cuti       = '$izin_cuti',
+                jam_lembur      = '$jam_lembur',
+                total_tunjangan = '$total_tunjangan',
+                total_potongan  = '$total_potongan',
+                total_lembur    = '$total_lembur',
+                total_kasbon    = '$total_kasbon',
+                total           = '$total',
+                keterangan      = '$keterangan',
+                user_edit       = '$user_edit',
+                tgl_edit        = '$tgl_edit',
+                nomor           = '$nomor',
+                periode         = '$periode
+            WHERE id = '$id' ";    
+    $qry = mysqli_query($connect, $sql);
+    
+    $id_master = $id;
 
+    //ambil data detail yang kasbon saja untuk balikin sisa di kasbon pegawai
+    $sql = "SELECT id, id_master, tipe, id_tjg_pot_kas, jumlah 
+            FROM penggajian_detail 
+            WHERE id_master = $id_master AND tipe ='K' ";
+    $qry = mysqli_query($connect, $sql);
+    
+    //Balikin sisa kasbon pegawai jika ada
+    while($row = mysqli_fetch_assoc($qry)){        
+        $id_tjg_pot_kas = $row["id_tjg_pot_kas"];
+        $jumlah         = $row["jumlah"];
+
+        $sql = "UPDATE Kasbon_pegawai SET sisa = sisa + $jumlah 
+        WHERE id = $id_tjg_pot_kas"; 
+        $mysql->query($sql);        
+    }
+    
+    //Delete detail penggajian
+    $sql = "DELETE FROM penggajian_detail WHERE id_master = '$id_master'";            
+    $mysql->query($sql);   
+    
+    
+
+    //save data detail
     foreach($JsonDetail as $item) {          
         $tipe           = $item['tipe'];
         $id_tjg_pot_kas = $item['id_tjg_pot_kas'];
@@ -65,8 +111,7 @@
             $mysql->query($sql);
         }
     }            
-
-    // Update ke kasbon jika ada
+    
 
     $hasil = true;
    
@@ -74,11 +119,11 @@
     if($hasil == true){
         $response = new emp();
 		$response->success = 1;
-		$response->message = "Data berhasil di simpan";
+		$response->message = "Data edit";
 		die(json_encode($response));
     }else{
         $response = new emp();
 		$response->success = 0;
-		$response->message = "Error simpan Data";
+		$response->message = "Error edit";
         die(json_encode($response));    
     }
