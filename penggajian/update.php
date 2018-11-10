@@ -112,9 +112,7 @@
         }
     }            
     
-
     $hasil = true;
-   
 
     if($hasil == true){
         $response = new emp();

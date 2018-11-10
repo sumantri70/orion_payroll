@@ -15,5 +15,5 @@
     
     echo json_encode(array('data' =>$json));
 
-    mysqli_close($connect);	
+    mysqli_close($connect);
 ?>

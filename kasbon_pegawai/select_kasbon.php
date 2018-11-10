@@ -17,7 +17,6 @@
 	if($id_pegawai <> 0){
 		$filter .= " AND id_pegawai = '$id_pegawai' ";
 	}
-
     
 	$sql = "SELECT id, nomor, tanggal, id_pegawai, jumlah, cicilan, sisa, keterangan, user_id, tgl_input, user_edit, tgl_edit
 			FROM kasbon_pegawai 
