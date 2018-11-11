@@ -10,10 +10,10 @@
     $JsonMaster = json_decode($json)->master;     
     $ObjDetail  = json_decode($json)->detail; //Convert data detail ke object
     $JsonDetail = array();   
-    $JsonDetail = json_decode(json_encode($ObjDetail) ,true); //Convert dari object  ke array    
+    $JsonDetail = json_decode(json_encode($ObjDetail) ,true); //Convert dari object  ke array        
 
-    $tanggal         = $JsonMaster->tanggal;
-    $periode         = $JsonMaster->periode;
+    $tanggal         = $JsonMaster->tanggal;    
+    $periode         = $JsonMaster->periode;    
     $id_pegawai      = $JsonMaster->id_pegawai;
     $gaji_pokok      = $JsonMaster->gaji_pokok;
     $uang_ikatan     = $JsonMaster->uang_ikatan;
@@ -37,8 +37,11 @@
     $tgl_input       = 'now()';
     $user_edit       = '';
     $tgl_edit        = 0;    
-    $nomor           = Get_Next_Number($tanggal, 'GS');    
-    $periode         = $JsonMaster->tanggal;
+    $nomor           = Get_Next_Number($tanggal, 'GS');            
+
+    $StartOfTheMonth = new DateTime("first day of $periode");    
+    $periode         = $StartOfTheMonth->format('Y-m-d'); 
+    
 
     $sql = "INSERT INTO penggajian_master (nomor, tanggal, periode, id_pegawai, gaji_pokok, uang_ikatan, uang_kehadiran, premi_harian, premi_perjam,
                                            telat_satu, telat_dua, dokter, izin_stgh_hari, izin_non_cuti, izin_cuti, jam_lembur, total_tunjangan,
@@ -46,9 +49,8 @@
             VALUES( '$nomor', '$tanggal', '$periode', '$id_pegawai', '$gaji_pokok', '$uang_ikatan', '$uang_kehadiran', '$premi_harian', '$premi_perjam',
                     '$telat_satu', '$telat_dua', '$dokter', '$izin_stgh_hari', '$izin_non_cuti', '$izin_cuti', '$jam_lembur', '$total_tunjangan',
                     '$total_potongan', '$total_lembur', '$total_kasbon', '$total', '$keterangan', '$user_id', '$tgl_input', '$user_edit', $tgl_edit)";            
-    $mysql->query($sql);
+    $mysql->query($sql);    
     $id_master = $mysql->insert_id; 
-
 
     foreach($JsonDetail as $item) {          
         $tipe           = $item['tipe'];
